@@ -1,0 +1,20 @@
+spring:
+  thymeleaf:
+    encoding: utf-8
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/hui_play?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+  mvc:
+    static-path-pattern: /static/**
+  protocols:
+    active: config
+mybatis-plus:
+  mapper-location: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.hzlx.springbootstudt.entity
+  configuration:
+    map-underscore-to-camel-case: true
+hui_play:
+  session-key: userInfo
