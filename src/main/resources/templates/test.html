@@ -13,7 +13,7 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px">
     <legend>菜单新增</legend>
 </fieldset>
-<form class="layui-form" id="addMenu" action="/addMenu" method="post" lay-filter="example">
+<div class="layui-form layuimini-form">
     <div class="layui-form-item">
         <label class="layui-form-label">菜单名称</label>
         <div class="layui-input-block">
@@ -29,8 +29,21 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">父级菜单ID</label>
-        <div class="layui-input-block">
+        <label class="layui-form-label">父级菜单</label>
+
+<!--        <div class="layui-input-inline">-->
+<!--            <select name="title" onclick="getGenderList()" lay-verify="required">-->
+<!--                <option value=""></option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-primary demo-dropdown-base">
+                <span>菜单列表</span>
+                <i  class="layui-icon  layui-icon-down layui-font-12"></i>
+            </button>
+        </div>
+        <!--<div class="layui-input-block">
             <input
                     type="text"
                     name="pId"
@@ -39,7 +52,7 @@
                     placeholder="请输入PID"
                     class="layui-input"
             />
-        </div>
+        </div>-->
     </div>
 
     <div class="layui-form-item">
@@ -80,22 +93,44 @@
             </button>
         </div>
     </div>
-</form>
+</div>
 <script src="/static/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="/static/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/js/jquery.min.js?v=1.1" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(["form", "layedit", "iconPickerFa"], function () {
+    layui.use(["form", "layedit", "iconPickerFa"], function (data) {
         var form = layui.form,
             layer = layui.layer,
             layedit = layui.layedit,
-            iconPickerFa = layui.iconPickerFa
-
+            iconPickerFa = layui.iconPickerFa,
+            dropdown = layui.dropdown
+        // 渲染
+        $.ajax({
+            url:"/getMenuIdList",
+            type:"get",
+            dataType: "json",
+            success(res){
+                console.log(res);
+                dropdown.render({
+                    elem: '.demo-dropdown-base', // 绑定元素选择器，此处指向 class 可同时绑定多个元素
+                    data:res.data,
+                    click: function(obj){
+                        this.elem.find('span').text(obj.title);
+                    }
+                });
+            }
+        })
         //监听提交
         form.on("submit(demo1)", function (data) {
             // 关闭弹出层
             layer.close(index);
-            var iframeIndex = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(iframeIndex);
+            let url="/addMenu";
+            $.ajax({
+                url:url,
+                type: "post",
+                data:data.field,
+
+            })
         });
 
 
@@ -141,10 +176,7 @@
                 console.log(d);
             }
         });
-
-
     })
-
 </script>
 </body>
 </html>

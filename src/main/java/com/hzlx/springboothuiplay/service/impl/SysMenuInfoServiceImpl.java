@@ -2,19 +2,18 @@ package com.hzlx.springboothuiplay.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hzlx.springboothuiplay.comment.MenuTitle;
 import com.hzlx.springboothuiplay.comment.ResultJSON;
 import com.hzlx.springboothuiplay.entity.SysMenuInfo;
 import com.hzlx.springboothuiplay.entity.SysUserInfo;
+import com.hzlx.springboothuiplay.entity.vo.SysMenuIdAndTitleVO;
 import com.hzlx.springboothuiplay.entity.vo.SysMenuInfoTreeVO;
 import com.hzlx.springboothuiplay.mapper.SysMenuInfoMapper;
 import com.hzlx.springboothuiplay.service.SysMenuInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -38,7 +37,6 @@ public class SysMenuInfoServiceImpl extends ServiceImpl<SysMenuInfoMapper,SysMen
     public int addSysMenuInfo(SysMenuInfo sysMenuInfo) {
         return sysMenuInfoMapper.insert(sysMenuInfo);
     }
-
     @Override
     public String getSysMenuInfo(SysUserInfo sysUserInfo) {
         Map<String,Object> menuMap=new HashMap<>();
@@ -79,6 +77,11 @@ public class SysMenuInfoServiceImpl extends ServiceImpl<SysMenuInfoMapper,SysMen
         int count = sysMenuInfoMapper.updateById(sysMenuInfo);
     }
 
+    @Override
+    public String getMenuIdList() {
+        List<SysMenuIdAndTitleVO> list = sysMenuInfoMapper.selectIdAndTitle();
+        return ResultJSON.success(list);
+    }
 
 
     private List<SysMenuInfoTreeVO> assembleSysMenuInfo(Integer pId){

@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * hui-play
@@ -42,5 +41,39 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoMapper, SysUs
             return ResultJSON.success();
         }
         return ResultJSON.error(100012, "账号或密码错误");
+    }
+
+    @Override
+    public String getUserAll() {
+        return ResultJSON.success(list());
+    }
+
+    @Override
+    public String saveUserInfo(SysUserInfo sysUserInfo) {
+        //基础数据拼装
+        sysUserInfo.setCreateTime(new Date());
+        sysUserInfo.setStatus(1);
+        if (save(sysUserInfo)) {
+            return ResultJSON.success(sysUserInfo);
+        }else {
+            return ResultJSON.error(10011,"保存数据失败");
+        }
+    }
+
+    @Override
+    public String updateUser(SysUserInfo sysUserInfo) {
+        if (updateById(sysUserInfo)){
+            return ResultJSON.success();
+        }else {
+            return ResultJSON.error(10012,"修改用户失败");
+        }
+    }
+
+    @Override
+    public String deleteUser(Integer id) {
+        if (removeById(id)) {
+            return ResultJSON.success();
+        }
+        return ResultJSON.error(10013,"数据库异常，删除失败");
     }
 }

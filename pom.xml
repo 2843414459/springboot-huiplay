@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-hui-play</name>
     <description>springboot-hui-play</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -64,8 +65,33 @@
             <version>2.7.7</version>
             <optional>true</optional>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+
     </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

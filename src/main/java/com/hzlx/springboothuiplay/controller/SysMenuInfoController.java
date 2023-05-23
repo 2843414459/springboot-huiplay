@@ -6,12 +6,11 @@ import com.hzlx.springboothuiplay.service.SysMenuInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Description:
@@ -53,6 +52,11 @@ public class SysMenuInfoController {
     public String getMenuList(){
         return sysMenuInfoService.getMenuList();
     }
+    @RequestMapping("/getMenuIdList")
+    @ResponseBody
+    public String getMenuIdAndTitle(){
+        return sysMenuInfoService.getMenuIdList();
+    }
 
     @PostMapping("/addMenu")
     public String addMenu(SysMenuInfo sysMenuInfo){
@@ -66,7 +70,4 @@ public class SysMenuInfoController {
         sysMenuInfoService.changeMenu(sysMenuInfo, id);
         return "home";
     }
-
-
-
 }

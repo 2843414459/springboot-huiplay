@@ -1,7 +1,6 @@
 spring:
   thymeleaf:
     encoding: utf-8
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -11,6 +10,10 @@ spring:
     static-path-pattern: /static/**
   protocols:
     active: config
+  #设置全局时间返回的格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 mybatis-plus:
   mapper-location: classpath*:/mapper/*Mapper.xml
   type-aliases-package: com.hzlx.springbootstudt.entity

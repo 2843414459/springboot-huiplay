@@ -7,25 +7,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * hui-play
- * 2023/5/15 8:58
- * 星期一
+ * springboot-hui-play
+ * 2023/5/23 16:20
+ * 星期二
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("t_sys_user_info")
-public class SysUserInfo implements Serializable {
+@TableName("t_role_info")
+public class SysRoleInfo {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    private String userName;
-    private String password;
-    private String nickName;
-    private String imgUrl;
+    private String name;
     private Date createTime;
     private Integer status;
 }

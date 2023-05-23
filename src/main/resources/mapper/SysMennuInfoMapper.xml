@@ -29,4 +29,8 @@
         left join t_role_user tru on tru.role_id=trm.role_id
         where tsmi.pid=#{pId} and tru.user_id=#{userId}
     </select>
+    <select id="selectIdAndTitle" resultType="com.hzlx.springboothuiplay.entity.vo.SysMenuIdAndTitleVO">
+        select id,title
+        from t_sys_menu_info;
+    </select>
 </mapper>

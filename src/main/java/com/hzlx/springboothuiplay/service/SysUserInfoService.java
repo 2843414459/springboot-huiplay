@@ -18,4 +18,12 @@ public interface SysUserInfoService extends IService<SysUserInfo>  {
      * @return
      */
     String login(HttpServletRequest request, String username, String password);
+
+    String getUserAll();
+
+    String saveUserInfo(SysUserInfo sysUserInfo);
+
+    String updateUser(SysUserInfo sysUserInfo);
+
+    String deleteUser(Integer id);
 }

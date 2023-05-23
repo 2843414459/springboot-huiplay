@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hzlx.springboothuiplay.entity.SysMenuInfo;
 import com.hzlx.springboothuiplay.entity.SysUserInfo;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Description:
@@ -24,4 +25,6 @@ public interface SysMenuInfoService extends IService<SysMenuInfo> {
     void addMenu(SysMenuInfo sysMenuInfo);
 
     void changeMenu( SysMenuInfo sysMenuInfo,Integer id);
+
+    String getMenuIdList();
 }

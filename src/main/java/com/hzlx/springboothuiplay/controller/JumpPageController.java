@@ -55,5 +55,10 @@ public class JumpPageController {
         return "user_list";
     }
 
+    @GetMapping("/role_list")
+    public String goRoleListPage(){
+        return "role_list";
+    }
+
 
 }
